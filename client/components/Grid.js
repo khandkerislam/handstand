@@ -1,8 +1,10 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import * as Tone from "tone";
 import Note from './Note';
-const Grid = () => {
+import SongList from './SongList';
+const Grid = (props) => {
     const synth = new Tone.Synth().toDestination();
+    //const {grid, updateGrid} = props;
 
     function playNote(note,index) {
       const copy = grid.slice();
@@ -15,6 +17,9 @@ const Grid = () => {
     const [grid, setGrid] = useState([false,false,false,false,false,false,false]);
     const [title, setTitle] = useState('');
 
+    const updateGrid = (data)=>{
+      setGrid(data);
+    }
     const saveGrid = () => {
         // check if name is empty
           fetch('http://localhost:3000/music/song', {
@@ -45,6 +50,7 @@ const Grid = () => {
             </div>
             <input type="text" onChange={event => setTitle(event.target.value)}></input>
             <button onClick={saveGrid}>Save</button>
+            <SongList updateGrid = {updateGrid}/>
         </>
     ) 
 }

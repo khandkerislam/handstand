@@ -7,12 +7,12 @@ import Song from './Song';
 const SongList = (props)=> {
 
     const [songs, setSongs] = useState([]);
-    const [currentSong, setCurrentSong] = useState([]); 
-    const { getCurrentSong } = props.setSong
+    //const [currentSong, setCurrentSong] = useState([]); 
+    const { updateGrid } = props
 
     const updateSong = (data)=>{
-        setCurrentSong(data);
-        return getCurrentSong(currentSong);
+        //setCurrentSong(data);
+        return updateGrid(data);
     }
 
     useEffect(()=>{

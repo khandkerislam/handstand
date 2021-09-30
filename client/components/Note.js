@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState,useEffect } from 'react';
 
 
 const Note = (props)=>{
@@ -8,6 +8,9 @@ const Note = (props)=>{
         setActive(!props.active)
         props.play()
     }
+    useEffect(() => {
+        setActive(props.active);
+    }, [props.active]);
 
     return(
         <button 
