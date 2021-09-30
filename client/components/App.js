@@ -23,6 +23,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <h1>I don't know why, you have to click on a song twice to get the updated version</h1>
       <Grid/>
     </div>
   );

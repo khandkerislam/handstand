@@ -4,25 +4,37 @@ const Song = (props)=>{
 
     
     const [song, loadSong] = useState([]);
+    //const [name, setName] = useState(props.name);
     
     const getSong = () => {
+        //loadSong(updatedSong);
+        whyGod();
+        console.log('inside button',song);
         return props.activeSong(song);
     }
-    
-    useEffect(()=>{
-        const url = `http://localhost:3000/music/getSong/${props.name}`;
 
-        const fetchData = () => {
-            fetch(url)
-            .then(res => res.json())
-            .then((song) => {
-                if(!Array.isArray(song)) song = [];
-                return loadSong(song);
-            })
-            .catch(err=>console.log(err));
-            
-        }
-        fetchData();
+    const whyGod = () =>{
+        return fetchData();
+    }
+    
+    const url = `http://localhost:3000/music/getSong/${props.name}`;
+
+    const fetchData = () => {
+        return fetch(url)
+        .then(res => res.json())
+        .then((data) => {
+            if(!Array.isArray(data)) data = [];
+            return data;
+        })
+        .then((data)=>{
+            loadSong(data);
+            console.log('wtf',song);
+        })
+        .catch(err=>console.log(err));
+    }
+
+    useEffect(()=>{
+        return fetchData();
     },[]);
     return(
         <div>

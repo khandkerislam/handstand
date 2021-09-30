@@ -31,7 +31,6 @@ const SongList = (props)=> {
     },[newSong]);
 
     const songElems = songs.map((song,i)=>{
-
         return(
           <Song activeSong={updateSong} name={song.name}/>
         )

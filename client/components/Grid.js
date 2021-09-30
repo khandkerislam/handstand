@@ -5,6 +5,15 @@ import SongList from './SongList';
 const Grid = (props) => {
     const synth = new Tone.Synth().toDestination();
     //const {grid, updateGrid} = props;
+    const noteMap = {
+      0: 'C',
+      1: 'D',
+      2: 'E',
+      3: 'F',
+      4: 'G',
+      5: 'A',
+      6: 'B'
+    }
 
     function playNote(note,index) {
       const copy = grid.slice();
@@ -21,6 +30,17 @@ const Grid = (props) => {
     const updateGrid = (data)=>{
       setGrid(data);
     }
+
+    const playGrid = (grid)=> {
+      grid.forEach((note,index) => {
+        setTimeout(()=>{
+          if(note){
+            synth.triggerAttackRelease(`${noteMap[index]}4`, "8n");
+          }
+        },index * 1000)
+      });
+    }
+
     const saveGrid = () => {
         // check if name is empty
           fetch('http://localhost:3000/music/song', {
@@ -50,8 +70,11 @@ const Grid = (props) => {
                 <Note play={() => playNote("A",5)} text="A" active={grid[5]}/>
                 <Note play={() => playNote("B",6)} text="B" active={grid[6]}/>
             </div>
-            <input type="text" onChange={event => setTitle(event.target.value)}></input>
-            <button onClick={saveGrid}>Save</button>
+            <input type="text" onChange={event => setTitle(event.target.value)} value={title}></input>
+            <div>
+              <button onClick={saveGrid}>Save</button>
+              <button onClick={()=>playGrid(grid)}>Play</button>
+            </div>
             <SongList updateGrid = {updateGrid} newSong={songCount}/>
         </>
     ) 

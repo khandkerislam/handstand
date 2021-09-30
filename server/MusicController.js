@@ -32,8 +32,6 @@ MusicController.createSong = async (req, res, next) => {
 }
 
 MusicController.getSong = async (req, res, next) => {
-    console.log("SODFIJLFKJL")
-    console.log(req.params);
     try{
         const result = await Song.findOne(req.params);
         //console.log(result.song);

@@ -1,7 +1,7 @@
 .App {
     font-family: sans-serif;
     text-align: center;
-    height: 100vh;
+    height: 50vh;
   }
   .note-wrapper {
     height: 25%;
@@ -10,13 +10,12 @@
     justify-content: center;
   }
   .note {
-    height: 80px;
+    height: 40px;
     width: 40px;
-    background: white;
-    border: 2px solid #ccc;
+    background: rgb(255, 255, 255);
+    border: 2px solid rgb(213, 14, 14);
     border-radius: 2px;
     margin: 2px;
-    cursor: pointer;
   }
   .note-active {
     background: grey;
