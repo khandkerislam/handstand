@@ -4,17 +4,17 @@ import * as Tone from "tone";
 import SongList from './SongList';
 import Note from './Note';
 const Grid = (props) => {
-    const synth = new Tone.Synth().toDestination();
-    const
+
+    const synth = new Tone.PolySynth().toDestination();
     //const {grid, updateGrid} = props;
     const noteMap = {
-      0: 'C',
-      1: 'D',
-      2: 'E',
-      3: 'F',
-      4: 'G',
-      5: 'A',
-      6: 'B'
+      0: 'C4',
+      1: 'D4',
+      2: 'E4',
+      3: 'F4',
+      4: 'G4',
+      5: 'A4',
+      6: 'B4'
     }
 
     function playNote(note,row, column) {
@@ -34,13 +34,18 @@ const Grid = (props) => {
     }
 
     const playGrid = (grid)=> {
-      grid.forEach((note,index) => {
-        setTimeout(()=>{
-          if(note){
-            synth.triggerAttackRelease(`${noteMap[index]}4`, "8n");
+      for( let matrix = 0; matrix < grid.length; matrix++){
+        const column = [];
+        for(let i=0; i<grid.length; i++){
+          if(grid[i][matrix]){
+            column.push(noteMap[i]);
           }
-        },index * 1000)
-      });
+        }
+        console.log(column);
+        setTimeout(()=>{
+            synth.triggerAttackRelease(column, "8n");
+        },matrix * 1000)
+      }
     }
 
     const saveGrid = () => {
@@ -64,6 +69,51 @@ const Grid = (props) => {
     return(
         <>
             <div className="note-wrapper">
+              <div className="B">
+                <Note play={() => playNote("B",6,0)} text="B" active={grid[6][0]}/>
+                <Note play={() => playNote("B",6,1)} text="B" active={grid[6][1]}/>
+                <Note play={() => playNote("B",6,2)} text="B" active={grid[6][2]}/>
+                <Note play={() => playNote("B",6,3)} text="B" active={grid[6][3]}/>
+                <Note play={() => playNote("B",6,4)} text="B" active={grid[6][4]}/>
+                <Note play={() => playNote("B",6,5)} text="B" active={grid[6][5]}/>
+                <Note play={() => playNote("B",6,6)} text="B" active={grid[6][6]}/>
+              </div>
+              <div className="A">
+                <Note play={() => playNote("A",5,0)} text="A" active={grid[5][0]}/>
+                <Note play={() => playNote("A",5,1)} text="A" active={grid[5][1]}/>
+                <Note play={() => playNote("A",5,2)} text="A" active={grid[5][2]}/>
+                <Note play={() => playNote("A",5,3)} text="A" active={grid[5][3]}/>
+                <Note play={() => playNote("A",5,4)} text="A" active={grid[5][4]}/>
+                <Note play={() => playNote("A",5,5)} text="A" active={grid[5][5]}/>
+                <Note play={() => playNote("A",5,6)} text="A" active={grid[5][6]}/>
+              </div>
+              <div className="G">
+                <Note play={() => playNote("G",4,0)} text="G" active={grid[4][0]}/>
+                <Note play={() => playNote("G",4,1)} text="G" active={grid[4][1]}/>
+                <Note play={() => playNote("G",4,2)} text="G" active={grid[4][2]}/>
+                <Note play={() => playNote("G",4,3)} text="G" active={grid[4][3]}/>
+                <Note play={() => playNote("G",4,4)} text="G" active={grid[4][4]}/>
+                <Note play={() => playNote("G",4,5)} text="G" active={grid[4][5]}/>
+                <Note play={() => playNote("G",4,6)} text="G" active={grid[4][6]}/>
+              </div>
+              <div className="F">
+                <Note play={() => playNote("F",3,0)} text="F" active={grid[3][0]}/>
+                <Note play={() => playNote("F",3,1)} text="F" active={grid[3][1]}/>
+                <Note play={() => playNote("F",3,2)} text="F" active={grid[3][2]}/>
+                <Note play={() => playNote("F",3,3)} text="F" active={grid[3][3]}/>
+                <Note play={() => playNote("F",3,4)} text="F" active={grid[3][4]}/>
+                <Note play={() => playNote("F",3,5)} text="F" active={grid[3][5]}/>
+                <Note play={() => playNote("F",3,6)} text="F" active={grid[3][6]}/>
+              </div>
+              <div className="E">
+                <Note play={() => playNote("E",2,0)} text="E" active={grid[2][0]}/>
+                <Note play={() => playNote("E",2,1)} text="E" active={grid[2][1]}/>
+                <Note play={() => playNote("E",2,2)} text="E" active={grid[2][2]}/>
+                <Note play={() => playNote("E",2,3)} text="E" active={grid[2][3]}/>
+                <Note play={() => playNote("E",2,4)} text="E" active={grid[2][4]}/>
+                <Note play={() => playNote("E",2,5)} text="E" active={grid[2][5]}/>
+                <Note play={() => playNote("E",2,6)} text="E" active={grid[2][6]}/>
+              </div>
               <div className="D">
                 <Note play={() => playNote("D",1,0)} text="D" active={grid[1][0]}/>
                 <Note play={() => playNote("D",1,1)} text="D" active={grid[1][1]}/>
