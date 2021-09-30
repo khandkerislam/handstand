@@ -16,6 +16,7 @@ const Grid = (props) => {
 
     const [grid, setGrid] = useState([false,false,false,false,false,false,false]);
     const [title, setTitle] = useState('');
+    const [songCount, setSongCount] = useState(0);
 
     const updateGrid = (data)=>{
       setGrid(data);
@@ -33,6 +34,7 @@ const Grid = (props) => {
             .then((data) => {
               console.log(data);
               setTitle('');
+              setSongCount(songCount + 1);
             })
             .catch(err => console.log('CreateSong fetch /music/song: ERROR: ', err));
     };
@@ -50,7 +52,7 @@ const Grid = (props) => {
             </div>
             <input type="text" onChange={event => setTitle(event.target.value)}></input>
             <button onClick={saveGrid}>Save</button>
-            <SongList updateGrid = {updateGrid}/>
+            <SongList updateGrid = {updateGrid} newSong={songCount}/>
         </>
     ) 
 }

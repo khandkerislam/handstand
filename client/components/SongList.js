@@ -8,27 +8,27 @@ const SongList = (props)=> {
 
     const [songs, setSongs] = useState([]);
     //const [currentSong, setCurrentSong] = useState([]); 
-    const { updateGrid } = props
+    const { updateGrid, newSong } = props
 
+    const url = "http://localhost:3000/music";
+
+    const fetchData = () => {
+        console.log('running')
+        fetch(url)
+            .then(res => res.json())
+            .then((songs) => {
+                if(!Array.isArray(songs)) songs = [];
+                return setSongs(songs);
+            })
+            .catch(err=>console.log(err));
+    }
     const updateSong = (data)=>{
-        //setCurrentSong(data);
         return updateGrid(data);
     }
 
     useEffect(()=>{
-        const url = "http://localhost:3000/music";
-
-        const fetchData = () => {
-            fetch(url)
-                .then(res => res.json())
-                .then((songs) => {
-                    if(!Array.isArray(songs)) songs = [];
-                    return setSongs(songs);
-                })
-                .catch(err=>console.log(err));
-        }
         fetchData();
-    },[]);
+    },[newSong]);
 
     const songElems = songs.map((song,i)=>{
 

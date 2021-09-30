@@ -17,7 +17,11 @@ MusicController.getSongs = async (req, res, next) => {
 
 MusicController.createSong = async (req, res, next) => {
     try{
-        const result = await Song.create(req.body);
+        const query = req.body;
+        const song = query.song;
+        const name = query.name;
+        const result = await Song.findOneAndUpdate({name: name}, query, {upsert: true});
+        console.log(result);
         return next();
     }catch(error){
         return next({
@@ -28,11 +32,11 @@ MusicController.createSong = async (req, res, next) => {
 }
 
 MusicController.getSong = async (req, res, next) => {
-    //console.log("SODFIJLFKJL")
-    //console.log(req.params);
+    console.log("SODFIJLFKJL")
+    console.log(req.params);
     try{
         const result = await Song.findOne(req.params);
-        console.log(result.song);
+        //console.log(result.song);
         res.locals.song = result.song;
         return next();
     }
